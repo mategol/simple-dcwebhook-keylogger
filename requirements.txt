@@ -1,4 +1,4 @@
 winreg
 pynput
 discord-webhook
-
+pyinstaller
