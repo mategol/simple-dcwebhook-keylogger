@@ -1,0 +1,4 @@
+winreg
+pynput
+discord-webhook
+
