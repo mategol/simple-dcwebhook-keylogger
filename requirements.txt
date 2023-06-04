@@ -1,0 +1,3 @@
+pynput
+discord-webhook
+pyinstaller
